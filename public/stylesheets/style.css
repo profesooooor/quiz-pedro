@@ -1,8 +1,48 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Arial, sans-serif;
+     background-color: #aa3322;
 }
 
-a {
-  color: #00B7FF;
+h1              { font-family: "Caesar Dressing"; }
+
+a               { color: #00B7FF; }
+
+section {
+  padding-top: 40px;
+  font: 20px;
+  font-family: Helvetica;
+  color: #bbbbff;
+}
+
+
+#n1 ul {
+padding: 0;		// Eliminamos el espaciado que pueda haber por defecto
+}
+
+#n1 li {
+display: inline;	// Eliminamos el avance de línea
+}
+
+#n1 li a {	// Lo personalizamos
+font-family: Arial;
+font-size:11px;
+text-decoration: none;
+float:left;
+padding: 10px;
+background-color: #2175bc;
+color: #fff;
+}
+
+#n1 li a:hover {		// Le damos vida
+background-color: #2586d7;
+margin-top:-2px;
+padding-bottom:12px;
+}
+
+#f1 {
+    padding-top: 10px;
+}
+#f1 a:hover {
+background-color: #2586d7;
 }
