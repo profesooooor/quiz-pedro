@@ -1,0 +1,5 @@
+quiz
+
+Para que funcione hay que meterse dentro de esta carpeta y hacer "npm start".
+También es posible ejecutar con "nodejs bin/www
+También se supone que con "foreman start"

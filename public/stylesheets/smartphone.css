@@ -1,0 +1,18 @@
+/*
+    smartphone.css
+    Este estilo se suma a "style.css", así que sólo habría que poner lo que lo diferencia de aquél.
+    Menú Horizontal arriba.
+    El pié debe desaparecer.
+*/
+
+body {
+  padding: 50px;
+  font: 14px Arial, sans-serif;
+     background-color: #aa5522;
+}
+
+h1              { font-family: "Caesar Dressing", sans-serif; }
+
+a               { color: #00B7FF; }
+
+footer      { display: none; }
