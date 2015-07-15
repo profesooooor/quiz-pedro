@@ -1,5 +1,12 @@
 quiz
 
+Ejecución en local: "foreman start" y acceder desde http://localhost:5000
+Ejecución en Internet: "heroku open" desde aquí abre el navegador en https://quiz-pedro.herokuapp.com/
+
+
+<------------------------------
+YA NO (desde que se modificó models.js para añadir Progres):
 Para que funcione hay que meterse dentro de esta carpeta y hacer "npm start".
-También es posible ejecutar con "nodejs bin/www
-También se supone que con "foreman start"
+También es posible ejecutar con "node bin/www" (nodejs bin/www en LliureX).
+Una vez hecha una de esas dos cosas, desde el navegador podemos acceder a localhost:3000.
+!>
