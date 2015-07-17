@@ -2,7 +2,7 @@
 
 var models = require('../models/models.js');
 
-// Autoload - factoriza el código si ruta incluye :quizId
+// Autoload - se activa si la ruta incluye :quizId, carga valor en variable quiz y pasa control a quien corresponda
 exports.load = function(req, res, next, quizId) {
     // models.Quiz.find(quizId).then(               -- no funciona en la versión actual de sequelize
     //models.Quiz.findOne().then (                  // funciona pero siempre devuelve la primera
@@ -22,10 +22,17 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 // Mostramos todas las preguntas que hay almacenadas en la base de datos. Utilizamos quizes/index.jade
+// Si se pasa el parámetro de URL "search" sólo se muestran las que cumplan el criterio
 exports.index = function(req, res) {
-    models.Quiz.findAll().then(function(quizes) {
-        res.render('quizes/index', {quizes: quizes});
-    }).catch(function(error) { next(error);});
+    if (req.query.search) {
+        var search='%'+req.query.search.replace(/ /g,'%')+'%';
+        console.log('---Estoy en exports.index. search vale ',search);
+        models.Quiz.findAll({where:["pregunta LIKE ?", search], order:"pregunta"}).then(function(quizes) {
+        // models.Quiz.findAll().then(function(quizes) {    // Versión antes del ejercicio P2P del módulo 7, ruta GET /quizes
+            res.render('quizes/index', {quizes: quizes});
+        }).catch(function(error) { next(error);});
+    } else
+        res.render('quizes/index', {quizes: {}});
 };
 
 // GET /quizes/:quizId

@@ -8,3 +8,9 @@ block content
   table
     -var i; for (i=0; i<quizes.length; i++)
       <tr><td><a href="quizes/#{quizes[i].id}">#{quizes[i].pregunta}</a></td></tr>
+  form(method="get", action="/quizes")
+    p ¿En que está interesado?:
+    p (Ejemplo: Italia)
+    p (Ponga % si quiere ver todas las preguntas disponibles)
+    <input type="text" name="search" value="%" />
+    <input type="submit" value="Enviar">
