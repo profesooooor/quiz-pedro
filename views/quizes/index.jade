@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+
+  // Esto es un comentario en JADE
+  // Un guión al principio indica JavaScript
+  // Un sangrado adicional de 2 espacios indica que está contenido en la etiqueta anterior
+  table
+    -var i; for (i=0; i<quizes.length; i++)
+      <tr><td><a href="quizes/#{quizes[i].id}">#{quizes[i].pregunta}</a></td></tr>
