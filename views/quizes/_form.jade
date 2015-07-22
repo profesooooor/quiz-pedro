@@ -1,0 +1,9 @@
+// _form.jade -- se lee desde new.jade --
+label(for="preg", class="rem") Pregunta:
+<input type="text" id="preg" name="quiz[pregunta]" value="#{quiz.pregunta}">
+p
+label(type="resp", class="rem") Respuesta:
+<input type="text" id="resp" name="quiz[respuesta]" value="#{quiz.respuesta}">
+p
+<input type="submit" value="Grabar">
+a(href="/quizes") <button type="button">Cancelar</button>

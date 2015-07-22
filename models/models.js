@@ -1,4 +1,4 @@
-// models.js
+// models/models.js
 
 var path = require('path');
 

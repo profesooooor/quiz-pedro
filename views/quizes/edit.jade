@@ -1,0 +1,14 @@
+// edit.jade
+// Aquí se ve un ejemplo de include que incluirá a _form.jade
+
+extends ../layout
+
+block content
+
+  // Esto es un comentario en JADE
+  // Esto es JADE, no EJS. Aquí, un sangrado adicional de 2 espacios indica que está contenido en la etiqueta anterior
+  p Edite la pregunta:
+
+  // Aquí es post y en index.js es router.put('/quizes/:quizId(\\d+)', quizController.update)
+  form(method="post", action="/quizes/#{quiz.id}?_method=put")
+    include _form

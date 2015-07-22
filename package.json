@@ -18,6 +18,7 @@
     "debug": "~2.2.0",
     "express": "~4.12.4",
     "jade": "~1.9.2",
+    "method-override": "^2.3.4",
     "morgan": "~1.5.3",
     "pg": "^4.4.0",
     "pg-hstore": "^2.3.2",

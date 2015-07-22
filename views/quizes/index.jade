@@ -1,3 +1,6 @@
+// views/quiz/index.jade
+// Lista de preguntas (quiz.pregunta) con posibilidad de editarlas
+
 extends ../layout
 
 block content
@@ -5,12 +8,17 @@ block content
   // Esto es un comentario en JADE
   // Un guión al principio indica JavaScript
   // Un sangrado adicional de 2 espacios indica que está contenido en la etiqueta anterior
-  table
-    -var i; for (i=0; i<quizes.length; i++)
-      <tr><td><a href="quizes/#{quizes[i].id}">#{quizes[i].pregunta}</a></td></tr>
   form(method="get", action="/quizes")
-    p ¿En que está interesado?:
-    p (Ejemplo: Italia)
+    p ¿En que está interesado? (Ejemplo: Italia):
     p (Ponga % si quiere ver todas las preguntas disponibles)
     <input type="text" name="search" value="%" />
     <input type="submit" value="Enviar">
+  table
+    -var i; for (i=0; i<quizes.length; i++)
+      tr
+        td <a href="quizes/#{quizes[i].id}">#{quizes[i].pregunta}</a>
+        td <a href="quizes/#{quizes[i].id}/edit"><button>editar</button></a>
+        td
+          form(method="post", action="quizes/#{quizes[i].id}?_method=delete")
+            <button type="submit" onClick="return confirm('Borrar: #{quizes[i].pregunta}');">borrar</button>
+  a(href="/quizes/new") <button type="button"> Añadir pregunta
