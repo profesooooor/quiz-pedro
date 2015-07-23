@@ -5,5 +5,24 @@ p
 label(type="resp", class="rem") Respuesta:
 <input type="text" id="resp" name="quiz[respuesta]" value="#{quiz.respuesta}">
 p
+label(type="tema", class="rem") Tema:
+
+<select name="quiz[tema]" id="temita">
+<option value="#{quiz.tema}" selected> #{quiz.tema} </option>
+<option value="Otro">Otro</option>
+<option value="Humanidades">Humanidades</option>
+<option value="Ocio">Ocio</option>
+<option value="Ciencia">Ciencia</option>
+<option value="Tecnología">Tecnología</option>
+</select>
+
+
+
+//<input type="text" id="temita" name="quiz[tema]" value="#{quiz.tema}">
+
+
+
+
+p
 <input type="submit" value="Grabar">
 a(href="/quizes") <button type="button">Cancelar</button>

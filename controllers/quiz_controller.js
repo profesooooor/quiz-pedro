@@ -7,9 +7,8 @@ exports.load = function(req, res, next, quizId) {
     // models.Quiz.find(quizId).then(               -- no funciona en la versión actual de sequelize
     //models.Quiz.findOne().then (                  // funciona pero siempre devuelve la primera
     models.Quiz.findById(quizId). then (
-    // models.Quiz.findAll({ where: {id: {eq: quizId} } }) // jamás lo probé
        function(quiz) {
- console.log('He buscado ',quiz.id,' que es lo mismo que el ',quizId    )           
+           console.log('He buscado ',quiz.id,' que es lo mismo que el ',quizId    )           
            if (quiz) {
                req.quiz = quiz;
                next();  // Este next() salta a index, show o answer según la ruta
@@ -63,7 +62,7 @@ exports.answer = function(req, res) {
 // GET /quizes/new
 exports.new = function(req, res) {
     // Construir objeto Quiz válido que el usuario editará:
-    var quiz = models.Quiz.build ({pregunta:"Pregunta", respuesta:"Respuesta"});
+    var quiz = models.Quiz.build ({pregunta:"Pregunta", respuesta:"Respuesta", tema:"Otro"});
     res.render('quizes/new', {quiz: quiz, errors: []});
 }
 
@@ -83,7 +82,7 @@ exports.create = function (req, res) {
             } else {
                 quiz
                 // Guarda en la BD (save) y, si fue bien, redirijir a lista de preguntas, donde ya saldrá la nueva
-                .save({fields: ["pregunta", "respuesta"]})
+                .save({fields: ["pregunta", "respuesta", "tema"]})
                 .then(function() { res.redirect('/quizes'); })
             }
         }
@@ -100,7 +99,8 @@ exports.update = function (req,res) {
     console.log("exports.update pregunta ya editada: ",req.body.quiz.pregunta);
     req.quiz.pregunta = req.body.quiz.pregunta;
     req.quiz.respuesta = req.body.quiz.respuesta;
-    console.log("voy a validar y actualizar en la bd")
+    req.quiz.tema = req.body.quiz.tema;
+    console.log("exports.update: voy a validar y actualizar en la bd")
     req.quiz
     .validate()
     .then(function (err) {
@@ -108,7 +108,7 @@ exports.update = function (req,res) {
             res.render('quizes/edit', {quiz: req.quiz, errors: err.errors});
         } else {
             req.quiz
-            .save( {fields: ["pregunta", "respuesta"]} )
+            .save( {fields: ["pregunta", "respuesta", "tema"]} )
             .then( function() { res.redirect('/quizes');});
         }
     });
