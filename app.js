@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //var partials = require('express-partials');   Esto lo he visto en el módulo 8 pero no me había hecho falta
 var methodOverride = require('method-override');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 
@@ -24,9 +25,21 @@ app.use(bodyParser.json());
 // Quitamos el parámetro { extended: false } para que se pasen bien las propiedades de quiz en _form.jade
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({extended:true}));    // Ya no es correcto dejar la opción por defecto, hay que indicarla
-app.use(cookieParser());
+app.use(cookieParser("quiz-pedro"));                // "quiz-pedro" es la semilla para filtrar cookie
+app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Helpers dinámicos (no sé qué significa 'helper')
+app.use(function(req, res, next) {
+    // Guardar path en session.redir para saber dónde volver tras hacer el login/logout
+    if (!req.path.match(/\/login|\/logout/)) {
+        req.session.redir = req.path;
+    }
+    // Hacer visible req.session en las vistas
+    res.locals.session = req.session;
+    next();
+});
 
 app.use('/', routes);
 

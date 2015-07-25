@@ -9,7 +9,7 @@ body              { padding: 50px; font: 14px Georgia, serif; background-color: 
 #page-wrap   { margin: 2% auto; color: white; }
 #page-wrap > .main { border: 1px solid #999; padding 1%;
                     margin-bottom: 1px; color: black; }
-
+.right                        {float:right};
 
 h1                 { font-family: "Caesar Dressing"; }
 

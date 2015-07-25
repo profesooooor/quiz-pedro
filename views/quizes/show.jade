@@ -1,3 +1,5 @@
+// views/quizes/show.jade
+
 extends ../layout
 
 block content
@@ -9,3 +11,14 @@ block content
   <input type="text" name="respuesta" value="Respuesta" />
   <input type="submit" value="Enviar">
   </form>
+
+  p <a href="/quizes/#{quiz.id}/comments/new"><button>Nuevo comentario</button></a>
+  p <strong>Comentarios:</strong>
+  -for(i in quiz.Comments) {
+    -if (quiz.Comments[i].publicado || session.user) {
+      p - #{quiz.Comments[i].texto} 
+        -if (!quiz.Comments[i].publicado && session.user) {
+          <a href="/quizes/#{quiz.id}/comments/#{quiz.Comments[i].id}/publish"><button>Publicar</button></a>
+          - }
+      - }
+    -}

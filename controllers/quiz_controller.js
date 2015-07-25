@@ -3,10 +3,15 @@
 var models = require('../models/models.js');
 
 // Autoload - se activa si la ruta incluye :quizId, carga valor en variable quiz y pasa control a quien corresponda
+// Además, el parámetro "include" del find() hace que se carguen los comentarios en quiz.Comments
 exports.load = function(req, res, next, quizId) {
     // models.Quiz.find(quizId).then(               -- no funciona en la versión actual de sequelize
-    //models.Quiz.findOne().then (                  // funciona pero siempre devuelve la primera
-    models.Quiz.findById(quizId). then (
+    //models.Quiz.findOne().then (                  // funciona pero siempre devuelve la primera, no la que toca
+    //models.Quiz.findById(quizId). then (          // Este sí que es bueno
+    models.Quiz.findOne({
+        where: { id: Number(quizId)},
+        include: [{ model: models.Comment }]
+    }). then (
        function(quiz) {
            console.log('He buscado ',quiz.id,' que es lo mismo que el ',quizId    )           
            if (quiz) {

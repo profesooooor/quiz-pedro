@@ -1,4 +1,7 @@
 // models/models.js
+// Modelo de datos de la aplicación Quiz
+// Desde aquí se importan las definiciones de las tablas, que están en comment.js y en quiz.js
+// Además, aquí es donde se definen las relaciones entre tablas
 
 var path = require('path');
 
@@ -38,11 +41,19 @@ var sequelize = new Sequelize(DB_name, user, pwd,
 );
                     
 // Importar la definición de la tabla Quiz en "models/quiz.js"
-var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
+var Quiz = sequelize.import(path.join(__dirname, 'quiz'));      // Importar definición tabla Quiz de models/quiz.js
+var Comment = sequelize.import(path.join(__dirname, 'comment')) // Importar definición tabla Comment de models/comment.js
 
-exports.Quiz = Quiz;    // Exportar definición de la tabla Quiz
+// Relaciones entre tablas.
+// Un Comment pertenece a un único Quiz, un Quiz tiene muchos Comment
+// Estas relaciones hacen que se añada la columna QuizId en la tabla Comment (clave externa)
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
 
-// sequelize.sync() crea e inicializa la tabla "preguntas" en la base de datos
+exports.Quiz = Quiz;        // Exportar definición de la tabla Quiz
+exports.Comment = Comment;  // Exportar definición de la tabla Comment
+
+// sequelize.sync() crea e inicializa la tabla "Quiz" en la base de datos
 sequelize.sync().then(function() {
     // then(...) ejecuta el manejador una vez creada la tabla
     Quiz.count().then(function (count){

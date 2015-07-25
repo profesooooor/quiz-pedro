@@ -1,0 +1,13 @@
+// views/comments/new.jade
+// está más comentado views/quizes/new.jade
+
+extends ../layout
+
+block content
+
+  p Añadir comentario:
+
+  // Se llama desde index.js con router.post('/quizes/:quizId(\\d+)/comments',commentController.create);
+  form(method="post", action="/quizes/#{quizid}/comments/")
+    <input type="text" id="comment" name="comment[texto]" value="" /> <p>
+    <button type="submit">Enviar</button>
